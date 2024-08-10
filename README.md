@@ -8,7 +8,7 @@ This repository provides Python implementations of key financial models commonly
 
 ## Overview
 
-This repository is designed for educational purposes and to serve as a foundation for developing more complex trading strategies and risk management tools. Each model is implemented in Python and includes example usage and basic parameter calibration.
+This repository is designed for practise and documentation of my learning processes (learning About trading algorithms).
 
 ## Models
 
