@@ -22,8 +22,8 @@ for t in range(1, n):
 # Convert to a DataFrame
 data = pd.DataFrame({'Returns': returns})
 
-# Fit a GARCH(1,1) model
-model = arch_model(data['Returns'], vol='Garch', p=1, q=1)
+# Fit a more complex GARCH model (e.g., GARCH(2,2))
+model = arch_model(data['Returns'], vol='Garch', p=2, q=2)
 garch_fit = model.fit()
 
 # Print the summary
@@ -57,6 +57,21 @@ plt.title('Rolling Window Volatility')
 plt.legend()
 plt.show()
 
+# Diagnostic plots
+# Residuals and their autocorrelation
+residuals = garch_fit.resid
+plt.figure(figsize=(12, 6))
+
+plt.subplot(2, 1, 1)
+plt.plot(residuals, label='Residuals')
+plt.title('Model Residuals')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+pd.plotting.autocorrelation_plot(residuals)
+plt.title('Autocorrelation of Residuals')
+plt.show()
+
 # Heatmap of conditional variances
 cond_vars = garch_fit.conditional_volatility ** 2
 data['Conditional Variance'] = cond_vars
@@ -78,6 +93,12 @@ plt.title('Heatmap of Conditional Variances')
 plt.xlabel('Time')
 plt.ylabel('Conditional Variance')
 plt.show()
+
+# Print performance metrics
+aic = garch_fit.aic
+bic = garch_fit.bic
+print(f"Akaike Information Criterion (AIC): {aic}")
+print(f"Bayesian Information Criterion (BIC): {bic}")
 
 # Print forecasted volatility
 print(f"Forecasted Volatility for the next 10 periods: {forecasted_volatility.values}")
