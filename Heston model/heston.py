@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 from scipy.stats import norm
+import seaborn as sns
 
 # 1. Monte Carlo Simulation for Option Pricing
 
@@ -11,7 +12,7 @@ def heston_mc_simulation(params, S0, r, T, n_simulations=10000, n_steps=252):
     S = np.zeros((n_steps, n_simulations))
     v = np.zeros((n_steps, n_simulations))
     S[0] = S0
-    v[0] = v0
+    v[0] = v0  # This should now work as v0 is a float
 
     for t in range(1, n_steps):
         z1 = np.random.normal(size=n_simulations)
@@ -114,6 +115,7 @@ def backtest_strategy(signals, S, transaction_cost=0.001):
 portfolio_value, daily_returns = backtest_strategy(signals, dummy_S)
 
 # Plot portfolio value over time
+plt.figure(figsize=(10, 6))
 plt.plot(portfolio_value)
 plt.title('Portfolio Value Over Time')
 plt.xlabel('Time Steps')
@@ -147,3 +149,54 @@ def risk_management(portfolio_value, max_drawdown_threshold=0.2, stop_loss=0.1, 
 # Assess the risk of the trading strategy
 risk_status = risk_management(portfolio_value)
 print("Risk Management Status:", risk_status)
+
+def option_price_heatmap(param_name, param_range, fixed_params, S0, r, T, K):
+    prices = []
+    for param_value in param_range:
+        params = list(fixed_params.values())
+        params[list(fixed_params.keys()).index(param_name)] = param_value
+        price = heston_pricing_function(params, S0, r, T, K)
+        prices.append(price)
+
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(np.array(prices).reshape(len(param_range), 1), annot=True, cmap="YlGnBu")
+    plt.title(f'Option Prices vs. {param_name}')
+    plt.xlabel(param_name)
+    plt.ylabel('Option Price')
+    plt.show()
+
+# Define a range for each parameter
+kappa_range = np.linspace(0.5, 3.0, 10)
+theta_range = np.linspace(0.01, 0.2, 10)
+sigma_range = np.linspace(0.1, 0.5, 10)
+
+# Fixed parameters for the heatmap generation
+fixed_params = {'kappa': 2.0, 'theta': 0.1, 'sigma': 0.2, 'rho': -0.7, 'v0': 0.1}
+
+# Generate heatmaps for kappa, theta, and sigma
+option_price_heatmap('kappa', kappa_range, fixed_params, 100, 0.05, 1.0, 100)
+option_price_heatmap('theta', theta_range, fixed_params, 100, 0.05, 1.0, 100)
+option_price_heatmap('sigma', sigma_range, fixed_params, 100, 0.05, 1.0, 100)
+
+# Heatmap for Sharpe Ratio vs. Heston Model Parameters
+
+def sharpe_ratio_heatmap(param_name, param_range, fixed_params, S0, r, T, K):
+    sharpe_ratios = []
+    for param_value in param_range:
+        params = list(fixed_params.values())
+        params[list(fixed_params.keys()).index(param_name)] = param_value
+        _, daily_returns = backtest_strategy(signals, dummy_S)
+        sharpe_ratio = np.mean(daily_returns) / np.std(daily_returns) * np.sqrt(252)
+        sharpe_ratios.append(sharpe_ratio)
+
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(np.array(sharpe_ratios).reshape(len(param_range), 1), annot=True, cmap="YlOrRd")
+    plt.title(f'Sharpe Ratio vs. {param_name}')
+    plt.xlabel(param_name)
+    plt.ylabel('Sharpe Ratio')
+    plt.show()
+
+# Generate Sharpe ratio heatmaps
+sharpe_ratio_heatmap('kappa', kappa_range, fixed_params, 100, 0.05, 1.0, 100)
+sharpe_ratio_heatmap('theta', theta_range, fixed_params, 100, 0.05, 1.0, 100)
+sharpe_ratio_heatmap('sigma', sigma_range, fixed_params, 100, 0.05, 1.0, 100)
