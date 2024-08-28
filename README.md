@@ -12,7 +12,7 @@ This repository is designed for practise and documentation of my learning proces
 
 ## Models
 
-### Black-Scholes Model
+### [Black-Scholes Model](https://github.com/CodingLife1024/High-Frequency-Trading/tree/master/Black%20Scholes%20Model)
 
 The Black-Scholes model is used to calculate the theoretical price of European call and put options based on assumptions about constant volatility and interest rates.
 
