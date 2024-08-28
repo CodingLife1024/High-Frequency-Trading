@@ -28,20 +28,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Fetch README from GitHub Repository
-        run: |
-          curl -L https://raw.githubusercontent.com/CodingLife1024/High-Frequency-Trading/master/Black%20Scholes%20Model/README.md -o _includes/black-scholes-model-readme.md
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
