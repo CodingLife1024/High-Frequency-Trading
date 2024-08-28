@@ -12,9 +12,9 @@ __Volatility ($\sigma$)__: Volatility refers to the degree of variation in the p
 
 Mathematical Expression:
 
-$
+$$
 \sigma = \sqrt{\frac{1}{T} \sum_{t=1}^{T} (r_t - \bar{r})^2}
-$
+$$
 
 __Time to Maturity (in years) (T)__: This represents the remaining time until the option's expiration date.
 
