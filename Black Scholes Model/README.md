@@ -368,15 +368,15 @@ Transforming back to the original variables, we derive the famous Black-Scholes 
 
 - **Call Option**:
 
-  $$
-  C(S_0, t) = S_0 N(d_1) - K e^{-r(T-t)} N(d_2)
-  $$
+$$
+C(S_0, t) = S_0 N(d_1) - K e^{-r(T-t)} N(d_2)
+$$
   
 - **Put Option**:
 
-  $$
-  P(S_0, t) = K e^{-r(T-t)} N(-d_2) - S_0 N(-d_1)
-  $$
+$$
+P(S_0, t) = K e^{-r(T-t)} N(-d_2) - S_0 N(-d_1)
+$$
 
 where:
 
