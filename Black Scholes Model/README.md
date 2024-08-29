@@ -94,9 +94,11 @@ The Black-Scholes equation is a partial differential equation that describes the
 
 Consider a portfolio \( $\Pi$ \) consisting of a long position in one option and a short position in \( $\Delta$ \) units of the underlying asset. The value of the portfolio at time \( t \) is:
 
-$$\Pi$$ = V($$S_t$$, t) - $$\Delta$$ $$S_t$$
+$$
+\Pi = V(S_t, t) - \Delta S_t
+$$
 
-where \( V($S_t$, t) \) is the value of the option at time \( t \).
+where \( $V(S_t, t)$ \) is the value of the option at time \( t \).
 
 #### Step 3: Applying Ito's Lemma
 
@@ -387,3 +389,21 @@ d_2 = d_1 - \sigma\sqrt{T}
 $$
 
 These formulas are derived from the Black-Scholes PDE by applying the appropriate boundary conditions for European call and put options. The boundary conditions enforce that the option's value at maturity must match the payoff structure of the option, which then propagates backward through time to give the current option price.
+
+### More Information
+
+#### **Disadvantages of the Black-Scholes model**:
+
+- The model assumes constant volatility and interest rates, and log-normal distribution of asset prices, which often does not hold in reality.
+
+- It also assumes that markets are frictionless (no transaction costs or taxes), and that options can only be exercised at maturity (European options).
+
+- The model is only accurate for European options, which can only be exercised at expiration, and not for American options, which can be exercised at any time before expiration.
+
+- The model does not account for sudden, extreme market movements (e.g., financial crises), leading to potential underestimation of option prices during such events.
+
+#### **Real-life Applications**
+
+- The primary use of the Black-Scholes model is in the pricing of European options.
+
+- Traders use the Greeks derived from the Black-Scholes model to manage the risk of options portfolios.
