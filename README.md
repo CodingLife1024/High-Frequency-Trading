@@ -5,6 +5,7 @@ This repository provides Python implementations of key financial models commonly
 - **Black-Scholes Model**: A classical model used for pricing European-style options.
 - **Heston Model**: A stochastic volatility model that extends the Black-Scholes framework to account for changing volatility.
 - **GARCH Model**: A model for estimating time-varying volatility based on historical data.
+- **Kalman Filter Model**: 
 
 ## Overview
 
