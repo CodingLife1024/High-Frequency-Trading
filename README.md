@@ -44,7 +44,7 @@ The GARCH (Generalized Autoregressive Conditional Heteroskedasticity) model esti
 To use the models, clone the repository and install the required dependencies.
 
 ```bash
-git https://github.com/CodingLife1024/High-Frequency-Trading
+git clone https://github.com/CodingLife1024/High-Frequency-Trading
 cd High-Frequency-Trading
 pip install -r requirements.txt
 ```
